@@ -1,12 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { UsersServiceService } from '../../services/users-service.service';
+import { Iuser } from '../../interfaces/iuser.interface';
+import { IuserPage } from '../../interfaces/iuser-page.interface';
 
 @Component({
   selector: 'app-user-list',
   standalone: true,
   imports: [],
   templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.css'
+  styleUrl: './user-list.component.css',
 })
-export class UserListComponent {
+export class UserListComponent implements OnInit {
+  usuariosServices = inject(UsersServiceService);
 
+  misUsuarios: Iuser[] = [];
+  async ngOnInit() {
+    try {
+      let pagina: IuserPage = await this.usuariosServices.getAll();
+      this.misUsuarios = pagina.results;
+      console.table(this.misUsuarios);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

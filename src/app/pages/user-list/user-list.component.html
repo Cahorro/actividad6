@@ -1,1 +1,14 @@
-<p>user-list works!</p>
+<section class="mt-4">
+    <div class="my-2 row g-3">
+        @for(usuario of misUsuarios; track usuario._id){
+        <article class="col-12 col-md-6 col-lg-4">
+            {{usuario.email}}
+        </article>
+        }@empty {
+        <article>
+            <strong>NO HAY PRODUCTOS DISPONIBLES</strong>
+        </article>
+        }
+
+    </div>
+</section>
