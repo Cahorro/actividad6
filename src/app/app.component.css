@@ -1,0 +1,6 @@
+.navbar-link .active {
+  color: red;
+}
+.active a {
+  color: green;
+}
