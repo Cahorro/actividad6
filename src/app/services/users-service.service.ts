@@ -16,4 +16,11 @@ export class UsersServiceService {
   getAll(): Promise<IuserPage> {
     return firstValueFrom(this.http.get<IuserPage>(this.baseUrl));
   }
+
+  deleteUser(id: string | undefined, name: string) {
+    if (confirm('Desea borrar el usuario ' + name + '?')) {
+      alert('Borrando usuario ' + name);
+      //this.http.delete(this.baseUrl).subscribe(() => this.status = 'Delete successful');
+    }
+  }
 }
