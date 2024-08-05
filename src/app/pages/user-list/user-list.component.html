@@ -1,4 +1,4 @@
-<section class="mt-4 mx-5">
+<section class="mt-4 mb-4 mx-5">
     <div class="my-2 row g-5">
         @for(usuario of misUsuarios; track usuario._id){
         <article class="col-12 col-md-6 col-lg-3">
@@ -12,3 +12,20 @@
 
     </div>
 </section>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="goToPage(currentPage-1)">Anterior</a>
+        </li>
+        <!-- este @for es para que el paginador sirva para cualquier número de páginas,
+          no solo para las 2 de la actividad. He usado el $index como tracker porque
+          es la única forma que he encontrado -->
+        @for (item of counter(numPages); track $index) {
+        <li class="page-item"><a class="page-link" [class.active]="currentPage === $index+1"
+                (click)="goToPage($index+1)">{{$index+1}}</a></li>
+        }
+        <li class="page-item" [class.disabled]="currentPage === numPages">
+            <a class="page-link" (click)="goToPage(currentPage+1)">Siguiente</a>
+        </li>
+    </ul>
+</nav>

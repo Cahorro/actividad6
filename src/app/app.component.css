@@ -1,6 +1,4 @@
-.navbar-link .active {
-  color: red;
-}
-.active a {
-  color: green;
+.active-link {
+  color: red !important;
+  font-weight: bold;
 }

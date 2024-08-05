@@ -2,6 +2,3 @@
 li {
   cursor: pointer;
 }
-li:active {
-  color: red; /* Cambia 'red' al color deseado */
-}

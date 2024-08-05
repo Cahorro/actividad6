@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Iuser } from '../interfaces/iuser.interface';
 import { IuserPage } from '../interfaces/iuser-page.interface';
 import { firstValueFrom } from 'rxjs';
+import { InjectSetupWrapper } from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root',
@@ -13,14 +14,29 @@ export class UsersServiceService {
 
   constructor() {}
 
-  getAll(): Promise<IuserPage> {
-    return firstValueFrom(this.http.get<IuserPage>(this.baseUrl));
+  getAll(pagina: number = 1): Promise<IuserPage> {
+    return firstValueFrom(
+      this.http.get<IuserPage>(`${this.baseUrl}?page=${pagina}`)
+    );
   }
 
-  deleteUser(id: string | undefined, name: string) {
-    if (confirm('Desea borrar el usuario ' + name + '?')) {
-      alert('Borrando usuario ' + name);
-      //this.http.delete(this.baseUrl).subscribe(() => this.status = 'Delete successful');
-    }
+  getById(id: string | undefined): Promise<Iuser> {
+    let url: string = `${this.baseUrl}/${id}`;
+    return firstValueFrom(this.http.get<Iuser>(url));
+  }
+
+  delete(id?: string): Promise<Iuser> {
+    return firstValueFrom(this.http.delete<Iuser>(`${this.baseUrl}/${id}`));
+  }
+
+  insert(body: Iuser): Promise<Iuser> {
+    return firstValueFrom(this.http.post<Iuser>(this.baseUrl, body));
+  }
+
+  update(body: Iuser): Promise<Iuser> {
+    console.log(`${this.baseUrl}/${body._id}`);
+    return firstValueFrom(
+      this.http.put<Iuser>(`${this.baseUrl}/${body._id}`, body)
+    );
   }
 }
