@@ -6,5 +6,4 @@ export interface Iuser {
   username: string;
   email: string;
   image: string;
-  password: string;
 }

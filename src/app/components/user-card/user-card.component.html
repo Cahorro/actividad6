@@ -7,19 +7,19 @@
     </div>
     <nav>
         <ul class="navbar-nav me-auto mb-2  d-flex flex-row justify-content-between">
-            <li class="nav-item bg-transparent text-lg-center">
+            <li class="nav-item bg-transparent text-center">
                 <a [routerLink]="['/user', miUsuario._id]" class="text-decoration-none text-reset">
                     <img src="/assets/images/search.svg" alt="Borrar" width="32" height="32">
                     <p>Ver detalle</p>
                 </a>
             </li>
-            <li class="nav-item bg-transparent text-lg-center">
+            <li class="nav-item bg-transparent text-center">
                 <a [routerLink]="['/updateuser', miUsuario._id]" class="text-decoration-none text-reset">
                     <img src="/assets/images/update.svg" alt="Borrar" width="32" height="32">
                     <p>Actualizar</p>
                 </a>
             </li>
-            <li class="nav-item bg-transparent  text-lg-center">
+            <li class="nav-item bg-transparent  text-center">
                 <a class="text-decoration-none text-reset" (click)="deleteUser()">
                     <img src="/assets/images/trash.svg" alt="Borrar" width="32" height="32">
                     <p>Borrar</p>

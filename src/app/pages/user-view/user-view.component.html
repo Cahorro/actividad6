@@ -1,1 +1,29 @@
-<p>user-view works!</p>
+<section>
+    <div class="container-fluid d-flex flex-lg-row flex-column g-10 mt-3">
+        <figure class="col-12 col-md-8 col-lg-6">
+            <img class="img-fluid rounded-circle m-5" [src]="oneUser.image" [alt]="oneUser.username">
+        </figure>
+        <div class="col-12 col-md-4 col-lg-6 flex-column align-content-center border-left border-2 border-black">
+            <h3>{{oneUser.first_name}}</h3>
+            <h3>{{oneUser.last_name}}</h3>
+            <p><strong>Nombre Usuario: </strong>{{oneUser.username}}</p>
+            <p><strong>Email: </strong>{{oneUser.email}}</p>
+            <nav class="navbar navbar-expand-lg bg-transparent">
+                <div class="container-fluid">
+                    <ul class="navbar-nav">
+                        <li class="nav-item border border-1 border-black mx-1">
+                            <a class="nav-link link-offset-3-hover" aria-current="page"
+                                (click)="deleteUser()">Eliminar</a>
+                        </li>
+                        <li class="nav-item border border-1 border-black mx-1">
+                            <a class="nav-link" [routerLink]="['/updateuser', oneUser._id]">Actualizar</a>
+                        </li>
+                        <li class="nav-item border border-1 border-black mx-1">
+                            <a class="nav-link" [routerLink]="['/home']">Volver a Listado</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</section>

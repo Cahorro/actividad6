@@ -1,1 +1,71 @@
-<p>user-form works!</p>
+<section class="container mt-3">
+    <div class="card shadow p-5">
+        <h3 class="text-uppercase">{{(tipo==='Actualizar')?tipo:'Nuevo'}} USUARIO</h3>
+        <hr>
+        <form [formGroup]="userForm" (ngSubmit)="getDataForm()">
+            <div class="my-3">
+                <label class="form-label" for="first_name">Nombre Usuario</label>
+                <input class="form-control" type="text" id="first_name" formControlName="first_name"
+                    placeholder="Introduzca el nombre del usuario">
+                @if(checkControl('first_name', 'required')){
+                <p class="error">El nombre es obligatorio</p>
+                }
+                @if(checkControl('first_name', 'minlength')){
+                <p class="error">La longitud minima del nombre es de 3 caracteres</p>
+                }
+            </div>
+
+            <div class="my-3">
+                <label class="form-label" for="last_name">Apellido Usuario</label>
+                <input class="form-control" type="text" id="last_name" formControlName="last_name"
+                    placeholder="Introduzca el apellido del usuario">
+                @if(checkControl('last_name', 'required')){
+                <p class="error">El apellido es obligatorio</p>
+                }
+                @if(checkControl('last_name', 'minlength')){
+                <p class="error">La longitud minima del apellido es de 3 caracteres</p>
+                }
+            </div>
+
+            <div class="my-3">
+                <label class="form-label" for="username">Usuario</label>
+                <input class="form-control" type="text" id="username" formControlName="username"
+                    placeholder="Introduzca el username">
+                @if(checkControl('username', 'required')){
+                <p class="error">El username es obligatorio</p>
+                }
+                @if(checkControl('username', 'pattern')){
+                <p class="error">El username es incorrecto</p>
+                }
+            </div>
+
+            <div class="my-3">
+                <label class="form-label" for="email">Email Usuario</label>
+                <input class="form-control" type="text" id="email" formControlName="email"
+                    placeholder="Introduzca el email del usuario">
+                @if(checkControl('email', 'required')){
+                <p class="error">El email es obligatorio</p>
+                }
+                @if(checkControl('email', 'pattern')){
+                <p class="error">El email es incorrecto</p>
+                }
+            </div>
+
+            <div class="my-3">
+                <label class="form-label" for="image">Imagen Usuario</label>
+                <input class="form-control" type="text" min="0" id="image" formControlName="image"
+                    placeholder="Introduzca la URL de la foto del usuario">
+                @if(checkControl('image', 'required')){
+                <p class="error">La URL de la imagen es obligatoria</p>
+                }
+                @if(checkControl('image', 'pattern')){
+                <p class="error">La URL de la imagen es incorrecta</p>
+                }
+            </div>
+
+            <div class="my-3">
+                <input type="submit" [value]="tipo" class="btn btn-primary" [disabled]="!userForm.valid">
+            </div>
+        </form>
+    </div>
+</section>

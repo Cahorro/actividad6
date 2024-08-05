@@ -3,8 +3,9 @@
     <img src="/assets/images/logo_usuarios.png" alt="" height="50" class="ml-auto my-2">
     <nav class="navbar navbar-expand-lg bg-transparent mt-3">
       <div class="container">
-        <a class="nav-link active bg-transparent mx-1" [routerLink]="['/home']">Home</a>
-        <a class="nav-link bg-transparent mx-1" [routerLink]="['/newuser']">Nuevo
+        <a class="nav-link active bg-transparent mx-2" [routerLink]="['/home']"
+          [routerLinkActive]="['active-link']">Home</a>
+        <a class="nav-link bg-transparent mx-2" [routerLink]="['/newuser']" [routerLinkActive]="['active-link']">Nuevo
           Usuario</a>
       </div>
     </nav>
