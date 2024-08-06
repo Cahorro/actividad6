@@ -33,8 +33,8 @@ export class UsersServiceService {
     return firstValueFrom(this.http.post<Iuser>(this.baseUrl, body));
   }
 
-  update(body: Iuser): Promise<Iuser> {
-    console.log(`${this.baseUrl}/${body._id}`);
+  update(body: Iuser, id: string): Promise<Iuser> {
+    body._id = id;
     return firstValueFrom(
       this.http.put<Iuser>(`${this.baseUrl}/${body._id}`, body)
     );

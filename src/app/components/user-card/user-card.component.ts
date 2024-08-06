@@ -26,7 +26,7 @@ export class UserCardComponent {
         );
         if (response._id) {
           const response = await this.usersService.getAll();
-          alert('Empleado borrado correctamente');
+          alert('Usuario borrado correctamente');
           this.router.navigate(['home']);
         }
       } catch (error) {

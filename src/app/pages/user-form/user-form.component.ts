@@ -17,13 +17,14 @@ import { Iuser } from '../../interfaces/iuser.interface';
   styleUrl: './user-form.component.css',
 })
 export class UserFormComponent {
-  usersSrevice = inject(UsersServiceService);
+  usersService = inject(UsersServiceService);
   router = inject(Router);
   activatedRoute = inject(ActivatedRoute);
 
   errorForm: any[] = [];
   tipo: string = 'Guardar';
   userForm: FormGroup;
+  idUser!: string;
 
   constructor() {
     this.userForm = new FormGroup(
@@ -44,7 +45,6 @@ export class UserFormComponent {
           Validators.required,
           Validators.pattern(
             /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-            // /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
           ),
         ]),
         image: new FormControl(null, [
@@ -63,38 +63,42 @@ export class UserFormComponent {
     this.activatedRoute.params.subscribe(async (params: any) => {
       if (params.id) {
         this.tipo = 'Actualizar';
-        const user: Iuser = await this.usersSrevice.getById(params.id);
+        const user: Iuser = await this.usersService.getById(params.id);
         this.userForm.patchValue(user);
+        console.log(this.userForm);
+        this.idUser = params.id;
       }
     });
   }
 
   async getDataForm() {
-    //console.log(this.userForm);
-    if (this.userForm.value._id) {
-      //Actualizando
+    console.log(this.idUser);
+    if (this.idUser) {
+      //Actualizando usuario
       try {
-        const response: Iuser = await this.usersSrevice.update(
-          this.userForm.value
+        const response: Iuser = await this.usersService.update(
+          this.userForm.value,
+          this.idUser
         );
         console.log(response);
         if (response._id) {
           alert('Usuario actualizado');
-          this.router.navigate(['/dashboard', 'empleados']);
+          this.router.navigate(['/user', this.idUser]);
         }
       } catch ({ error }: any) {
         this.errorForm = error;
         console.log(this.errorForm);
       }
     } else {
-      //insertando
-      //peticion al servicio para insertar los datos en la API
+      //Nuevo usuario
       try {
-        const response: Iuser = await this.usersSrevice.insert(
+        const response: Iuser = await this.usersService.insert(
           this.userForm.value
         );
-        if (response._id) {
-          this.router.navigate(['/dashboard', 'empleados']);
+        console.log(response);
+        if (response.id) {
+          alert('Usuario añadido');
+          this.router.navigate(['/home']);
         }
       } catch ({ error }: any) {
         this.errorForm = error;
