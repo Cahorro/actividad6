@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Iuser } from '../../interfaces/iuser.interface';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-form',
@@ -82,12 +83,16 @@ export class UserFormComponent {
         );
         console.log(response);
         if (response._id) {
-          alert('Usuario actualizado');
-          this.router.navigate(['/user', this.idUser]);
+          Swal.fire('Usuario actualizado correctamente', '', 'success').then(
+            async () => this.router.navigate(['/user', this.idUser])
+          );
         }
       } catch ({ error }: any) {
         this.errorForm = error;
         console.log(this.errorForm);
+        Swal.fire('Error', 'Error al actualizar el usuario', 'error').then(
+          async () => this.router.navigate(['/user', this.idUser])
+        );
       }
     } else {
       //Nuevo usuario
@@ -97,12 +102,16 @@ export class UserFormComponent {
         );
         console.log(response);
         if (response.id) {
-          alert('Usuario añadido');
-          this.router.navigate(['/home']);
+          Swal.fire('Usuario añadido correctamente', '', 'success').then(
+            async () => this.router.navigate(['/home'])
+          );
         }
       } catch ({ error }: any) {
         this.errorForm = error;
         console.log(this.errorForm);
+        Swal.fire('Error', 'Error al crear el usuario', 'error').then(
+          async () => this.router.navigate(['/user', this.idUser])
+        );
       }
     }
   }
