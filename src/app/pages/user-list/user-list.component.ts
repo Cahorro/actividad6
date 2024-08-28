@@ -22,7 +22,6 @@ export class UserListComponent implements OnInit {
       let pagina: IuserPage = await this.usuariosServices.getAll();
       this.misUsuarios = pagina.results;
       this.numPages = pagina.total_pages;
-      console.log(this.misUsuarios);
     } catch (error) {
       console.log(error);
     }
@@ -32,12 +31,10 @@ export class UserListComponent implements OnInit {
   }
   async goToPage(page: number) {
     try {
-      console.log(page);
       let pagina: IuserPage = await this.usuariosServices.getAll(page);
       this.misUsuarios = pagina.results;
       this.numPages = pagina.total_pages;
       this.currentPage = page;
-      console.log(this.misUsuarios);
     } catch (error) {
       console.log(error);
     }

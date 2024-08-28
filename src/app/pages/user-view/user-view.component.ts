@@ -2,6 +2,7 @@ import { Component, inject, input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { Iuser } from '../../interfaces/iuser.interface';
 import { UsersServiceService } from '../../services/users-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-view',
@@ -23,7 +24,6 @@ export class UserViewComponent implements OnInit {
         let response = await this.usersService.getById(id);
         if (response) {
           this.oneUser = response;
-          console.log(this.oneUser);
         }
       });
     } catch (error) {
@@ -31,23 +31,29 @@ export class UserViewComponent implements OnInit {
     }
   }
 
-  async deleteUser() {
-    let confirmacion = confirm(
-      `Desea borrar el usuario ${this.oneUser?.first_name} ${this.oneUser?.last_name}`
-    );
-    if (confirmacion) {
-      try {
-        const response: Iuser = await this.usersService.delete(
-          this.oneUser?._id
-        );
-        if (response._id) {
-          const response = await this.usersService.getAll();
-          alert('Usuario borrado correctamente');
-          this.router.navigate(['home']);
+  deleteUser() {
+    Swal.fire({
+      title: 'Atención',
+      text: `¿Desea borrar el usuario ${this.oneUser?.first_name} ${this.oneUser?.last_name}?`,
+      icon: 'warning',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Aceptar',
+    }).then(async (isConfirm) => {
+      if (isConfirm) {
+        try {
+          const response: Iuser = await this.usersService.delete(
+            this.oneUser?._id
+          );
+          if (response._id) {
+            const response = await this.usersService.getAll();
+            Swal.fire('Usuario borrado correctamente', '', 'success').then(() =>
+              this.router.navigate(['home'])
+            );
+          }
+        } catch (error) {
+          console.log(error);
         }
-      } catch (error) {
-        console.log(error);
       }
-    }
+    });
   }
 }
