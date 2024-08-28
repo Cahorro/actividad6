@@ -1,0 +1,30 @@
+<div class="card shadow p-3 border-2 border-black h-100">
+    <div class="row justify-content-center">
+        <figure class="figure px-5">
+            <img class="img-fluid rounded-circle" [src]="miUsuario.image" [alt]="miUsuario.username">
+        </figure>
+        <p class="text-center">Nombre: {{miUsuario.first_name}} {{miUsuario.last_name}}</p>
+    </div>
+    <nav>
+        <ul class="navbar-nav me-auto my-auto d-flex flex-column flex-md-row flex-lg-row justify-content-between">
+            <li class="nav-item bg-transparent text-center mx-auto">
+                <a [routerLink]="['/user', miUsuario._id]" class="text-decoration-none text-reset">
+                    <img src="/assets/images/search.svg" alt="Borrar" width="32" height="32">
+                    <p>Ver detalle</p>
+                </a>
+            </li>
+            <li class="nav-item bg-transparent text-center mx-auto">
+                <a [routerLink]="['/updateuser', miUsuario._id]" class="text-decoration-none text-reset">
+                    <img src="/assets/images/update.svg" alt="Borrar" width="32" height="32">
+                    <p>Actualizar</p>
+                </a>
+            </li>
+            <li class="nav-item bg-transparent  text-center mx-auto">
+                <a class="text-decoration-none text-reset" (click)="deleteUser()">
+                    <img src="/assets/images/trash.svg" alt="Borrar" width="32" height="32">
+                    <p>Borrar</p>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

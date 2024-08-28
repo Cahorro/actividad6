@@ -1,0 +1,35 @@
+<section>
+    <div class="container-fluid d-flex flex-column flex-lg-row g-10 mt-3 mx-5 h-auto">
+        <div class="col-sm 12 col-6 px-lg-5 px-md-5 mx-2">
+            <figure class="figure pe-5">
+                <img class="img-fluid rounded-circle m-5" [src]="oneUser?.image" [alt]="oneUser?.username">
+            </figure>
+        </div>
+        <div class="vr col-lg-1 col-md-1 opacity-100 d-none d-lg-block"></div>
+        <hr class="col-md-6 col-sm-6 d-lg-none d-block opacity-100 me-5">
+        <div class="col-6 flex-column align-content-center mx-5 overflow-x-hidden">
+            <div class="ps-3">
+                <h3>{{oneUser?.first_name}}</h3>
+                <h3>{{oneUser?.last_name}}</h3>
+                <p><strong>Nombre Usuario: </strong>{{oneUser?.username}}</p>
+                <p><strong>Email: </strong>{{oneUser?.email}}</p>
+            </div>
+            <nav class="navbar navbar-expand-lg bg-transparent ">
+                <div class="container-fluid">
+                    <ul class="navbar-nav mx-auto mx-lg-0">
+                        <li class="nav-item border border-1 border-black m-1 align-items-center">
+                            <a class="nav-link link-offset-3-hover" aria-current="page"
+                                (click)="deleteUser()">Eliminar</a>
+                        </li>
+                        <li class="nav-item border border-1 border-black m-1">
+                            <a class="nav-link" [routerLink]="['/updateuser', oneUser?._id]">Actualizar</a>
+                        </li>
+                        <li class="nav-item border border-1 border-black m-1 px-2 px-lg-0">
+                            <a class="nav-link" [routerLink]="['/home']">Volver a Listado</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</section>
